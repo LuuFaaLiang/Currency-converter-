@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Global Currency Converter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="shape s1"></div><div class="shape s2"></div><div class="shape s3"></div>
+  <button id="themeToggle" class="icon-btn theme" aria-label="Toggle dark or light mode"><i class="fa-solid fa-moon"></i></button>
+
+  <main class="wrap">
+    <header>
+      <h1><i class="fa-solid fa-coins"></i> Global Currency Converter</h1>
+      <p>Live exchange rates for 14 currencies, including the Cambodian Riel.</p>
+    </header>
+
+    <section class="glass converter">
+      <div class="popular" id="popular"></div>
+      <label for="amount">Amount</label>
+      <input id="amount" type="number" min="0" step="any" value="100" inputmode="decimal">
+      <div class="pair">
+        <div class="picker">
+          <label for="fromCur">From</label>
+          <div class="sel"><img id="fromFlag" alt=""><select id="fromCur"></select></div>
+          <input class="search" data-target="fromCur" placeholder="Search currency" aria-label="Search from currency">
+        </div>
+        <button id="swapBtn" class="icon-btn" aria-label="Swap currencies"><i class="fa-solid fa-right-left"></i></button>
+        <div class="picker">
+          <label for="toCur">To</label>
+          <div class="sel"><img id="toFlag" alt=""><select id="toCur"></select></div>
+          <input class="search" data-target="toCur" placeholder="Search currency" aria-label="Search to currency">
+        </div>
+      </div>
+      <button id="convertBtn" class="primary">Convert</button>
+      <p id="message" class="message" role="alert"></p>
+      <div id="spinner" class="spinner hidden" aria-label="Loading"></div>
+
+      <div id="resultCard" class="result hidden">
+        <div class="big"><span id="resultValue">0</span> <span id="resultCode"></span></div>
+        <div class="meta"><span id="rateLine"></span><span id="trend" class="trend"></span></div>
+        <small id="updated"></small>
+        <div class="actions">
+          <button id="copyBtn" class="ghost"><i class="fa-regular fa-copy"></i> Copy result</button>
+          <button id="favBtn" class="ghost"><i class="fa-regular fa-star"></i> Save pair</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="glass"><h2>Live rates in KHR</h2><ul id="liveRates" class="list"></ul></div>
+      <div class="glass"><h2>7-day trend</h2><canvas id="chart" height="160"></canvas><p id="chartNote" class="message"></p></div>
+      <div class="glass"><h2>Favorite pairs</h2><div id="favorites" class="chips"></div></div>
+      <div class="glass"><h2>History <button id="clearHistory" class="ghost small">Clear history</button></h2><ul id="history" class="list"></ul></div>
+    </section>
+
+    <footer>Built with Flask. Rates from open.er-api.com</footer>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
